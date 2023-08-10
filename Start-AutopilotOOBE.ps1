@@ -9,7 +9,7 @@ $Params = @{
     Assign = $true
     Disabled = 'Assign','GroupTag','PostAction'
 }
-AutopilotOOBE @Params
+# AutopilotOOBE @Params
 
 Start-AutopilotOOBE @Params
 
