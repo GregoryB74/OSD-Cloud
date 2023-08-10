@@ -1,4 +1,4 @@
-# start-autopilotoobe.osdcloud.ch
+# start-autopilotoobe
 $env:Path += ";C:\Program Files\WindowsPowerShell\Scripts"
 
 $Params = @{
