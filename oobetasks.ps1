@@ -1,4 +1,4 @@
-# oobetasks.osdcloud.ch
+# OOBEtasks
 
 $scriptFolderPath = "$env:SystemDrive\OSDCloud\Scripts"
 $ScriptPathOOBE = $(Join-Path -Path $scriptFolderPath -ChildPath "OOBE.ps1")
