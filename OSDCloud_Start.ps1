@@ -142,6 +142,7 @@ PowerShell -NoL -Com Set-ExecutionPolicy RemoteSigned -Force
 Set Path = %PATH%;C:\Program Files\WindowsPowerShell\Scripts
 Start /Wait PowerShell -NoL -C Install-Module AutopilotOOBE -Force -Verbose
 Start /Wait PowerShell -NoL -C Install-Module OSD -Force -Verbose
+Start /Wait PowerShell -NoL -C Invoke-WebRequest https://github.com/GregoryB74/Tools/raw/main/CMTrace.exe -OutFile "C:\Windows\System32\CMTrace.exe"
 Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/AP-Prereq.ps1
 Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotOOBE.ps1
 Start /Wait PowerShell -NoL -C Start-OOBEDeploy
