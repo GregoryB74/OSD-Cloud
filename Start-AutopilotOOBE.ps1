@@ -2,9 +2,9 @@
 $env:Path += ";C:\Program Files\WindowsPowerShell\Scripts"
 
 $Params = @{
-    Title = 'OSDeploy Gregory B'
-    GroupTag = 'PROD'
-    GroupTagOptions = 'PROD','DEV'
+    Title = 'Autopilot registration'
+    GroupTag = 'HQ_Laptop'
+    GroupTagOptions = 'AT_Desktop','AT_Kiosk_sleepOFF','AT_Kiosk_sleepON','AT_Laptop','AT_SharedDesktop','BE_Desktop','BE_Kiosk_sleepOFF','BE_Kiosk_sleepON','BE_Laptop','BE_SharedDesktop','CH_Desktop','CH_Kiosk_sleepOFF','CH_Kiosk_sleepON','CH_Laptop','CH_SharedDesktop','DE_Desktop','DE_Kiosk_sleepOFF','DE_Kiosk_sleepON','DE_Laptop','DE_SharedDesktop','DK_Desktop','DK_Kiosk_sleepOFF','DK_Kiosk_sleepON','DK_Laptop','DK_SharedDesktop','ES_Desktop','ES_Kiosk_sleepOFF','ES_Kiosk_sleepON','ES_Laptop','ES_SharedDesktop','FI_Desktop','FI_Kiosk_sleepOFF','FI_Kiosk_sleepON','FI_Laptop','FI_SharedDesktop','FR_Desktop','FR_Kiosk_sleepOFF','FR_Kiosk_sleepON','FR_Laptop','FR_SharedDesktop','HQ_Desktop','HQ_Kiosk_sleepOFF','HQ_Kiosk_sleepON','HQ_Laptop','HQ_SharedDesktop','IR_Desktop','IR_Kiosk_sleepOFF','IR_kiosk_sleepON','IR_Laptop','IR_SharedDesktop','IT_Desktop','IT_Digiprint_Kiosk','IT_Kiosk_sleepOFF','IT_Kiosk_sleepON','IT_Laptop','IT_SharedDesktop','NL_Desktop','NL_Kiosk_sleepOFF','NL_Kiosk_sleepON','NL_SharedDesktop','NL_Laptop','NL_Roaster_Desktop','NL_Roaster_Kiosk_sleepON','NL_Roaster_Kiosk_sleepOFF','NL_Roaster_Laptop','RO_SharedDesktop','NL_Vending_Kiosk','NO_Desktop','NO_Kiosk_sleepOFF','NO_Kiosk_sleepON','NO_Laptop','NO_SharedDesktop','SE_Desktop','SE_Kiosk_sleepOFF','SE_Kiosk_sleepON','SE_Laptop','SE_SharedDesktop','UK_Desktop','UK_Kiosk_sleepOFF','UK_Kiosk_sleepON','UK_Laptop','UK_SharedDesktop'
     Hidden = 'AddToGroup','AssignedComputerName','AssignedUser','PostAction'
     Assign = $true
     Disabled = 'Assign','PostAction'
