@@ -2,12 +2,12 @@
 $env:Path += ";C:\Program Files\WindowsPowerShell\Scripts"
 
 $Params = @{
-    Title = 'OSDeploy Gregorz B'
+    Title = 'OSDeploy Gregory B'
     GroupTag = 'PROD'
     GroupTagOptions = 'PROD','DEV'
     Hidden = 'AddToGroup','AssignedComputerName','AssignedUser','PostAction'
     Assign = $true
-    Disabled = 'Assign','GroupTag','PostAction'
+    Disabled = 'Assign','PostAction'
 }
 # AutopilotOOBE @Params
 
