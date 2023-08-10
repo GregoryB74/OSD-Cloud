@@ -10,4 +10,4 @@ Import-Module OSD -Force
 
 #Start OSDCloudScriptPad
 Write-Host -ForegroundColor Green "Start OSDPad"
-Start-OSDPad -RepoOwner AkosBakos -RepoName OSDCloud -RepoFolder ScriptPad -BrandingTitle 'Akos OSD Cloud Deployment'
+Start-OSDPad -RepoOwner GregoryB74 -RepoName OSD-Cloud -RepoFolder ScriptPad -BrandingTitle 'Gregory B OSD Cloud Deployment'
