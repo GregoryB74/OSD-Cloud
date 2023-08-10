@@ -25,16 +25,16 @@ Write-Host -ForegroundColor DarkGray "Executing Product Key Script"
 Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Install-EmbeddedProductKey.ps1" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing Autopilot Check Script"
-Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/AP-Prereq.ps1" -Wait
+Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/AP-Prereq.ps1" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing AutopilotOOBE Module"
-Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://start-autopilotoobe.osdcloud.ch" -Wait
+Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotOOBE.ps1" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing OOBEDeploy Script fomr OSDCloud Module"
 Start-Process PowerShell -ArgumentList "-NoL -C Start-OOBEDeploy" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing Cleanup Script"
-Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://cleanup.osdcloud.ch" -Wait
+Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/CleanUp.ps1" -Wait
 
 # Cleanup scheduled Tasks
 Write-Host -ForegroundColor DarkGray "Unregistering Scheduled Tasks"
@@ -73,7 +73,7 @@ Out-File -FilePath $ScriptPathSendKeys -InputObject $SendKeysScript -Encoding as
 
 # Download ServiceUI.exe
 Write-Host -ForegroundColor Gray "Download ServiceUI.exe from GitHub Repo"
-Invoke-WebRequest https://github.com/AkosBakos/Tools/raw/main/ServiceUI64.exe -OutFile "C:\OSDCloud\ServiceUI.exe"
+Invoke-WebRequest https://github.com/GregoryB74/Tools/raw/main/ServiceUI64.exe -OutFile "C:\OSDCloud\ServiceUI.exe"
 
 #Create Scheduled Task for SendKeys with 15 seconds delay
 $TaskName = "Scheduled Task for SendKeys"
