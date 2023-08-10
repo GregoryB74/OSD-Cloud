@@ -1,6 +1,17 @@
 # start-autopilotoobe.osdcloud.ch
 $env:Path += ";C:\Program Files\WindowsPowerShell\Scripts"
-Start-AutopilotOOBE
+
+$Params = @{
+    Title = 'OSDeploy Gregorz B'
+    GroupTag = 'PROD'
+    GroupTagOptions = 'PROD','DEV'
+    Hidden = 'AddToGroup','AssignedComputerName','AssignedUser','PostAction'
+    Assign = $true
+    Disabled = 'Assign','GroupTag','PostAction'
+}
+AutopilotOOBE @Params
+
+Start-AutopilotOOBE @Params
 
 <#
 Function Get-WindowsAutoPilotInfo {
