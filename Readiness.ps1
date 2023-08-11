@@ -121,6 +121,7 @@ If ($WindowsPhase -eq 'AuditMode')
 If ($WindowsPhase -eq 'OOBE') 
 {
 	Write-Host -ForegroundColor Yellow "[+] OOBE Phase specific actions."
+	Write-Host -ForegroundColor Yellow "Launching OOBE steps."
 	Invoke-WebPSScript "https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Phase_OOBE.ps1"
 	Read-Host
 	$null = Stop-Transcript -ErrorAction Ignore
