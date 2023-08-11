@@ -170,11 +170,12 @@ If ($WindowsPhase -eq 'OOBE')
 	else 
 	{
 		Write-Host -ForegroundColor red "Secure boot is disabled"
+        Write-Host -ForegroundColor red "Process can not continue. Please check your secureboot info in the BIOS"
         Exit
 	}
 	
 	# Check Intune, Azure & Autopilot
-	Write-Host -ForegroundColor Green "Installing WindowsAutoPilotIntune PowerShell Module"
+	Write-Host -ForegroundColor Green "[+] Installing WindowsAutoPilotIntune PowerShell Module"
 	Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 	Install-Module -Name WindowsAutoPilotIntune
 	
