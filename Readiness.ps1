@@ -61,7 +61,10 @@ Write-Host -ForegroundColor Yellow "[+] $ScriptName $ScriptVersion ($WindowsPhas
 #Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 
 # End Region Initialize
-
+if ((Get-MyComputerModel) -match 'Virtual') {
+    Write-Host  -ForegroundColor Green "Setting Display Resolution to 1600x"
+    Set-DisRes 1600
+}
 
 #####################
 ### Region Transport Layer Security (TLS) 1.2
