@@ -123,11 +123,25 @@ If ($WindowsPhase -eq 'OOBE')
 	
 	# Check OS version
     Write-Host -ForegroundColor Yellow "[+] OS information:"
+    $Computerinfo = Get-ComputerInfo
+    $PCName = $Computerinfo.CsName
+    $manufacturer = $Computerinfo.csmanufacturer
+    $model = $Computerinfo.csmodel
+    $OS = $Computerinfo.OSName
+    $Systemtype = $Computerinfo.CsPCSystemType
+    $BIOSVersion = $Computerinfo.BIOSVersion
+
 	$OSInfo = Get-WmiObject Win32_OperatingSystem
 	$serial = $osinfo.SerialNumber
 	$OSversion = $OSInfo.version
-	Write-Host -ForegroundColor Green "Serial number: $serial"
+
+    Write-Host -ForegroundColor Green "PC Name: $PCName"
+	Write-Host -ForegroundColor Green "Manufacturer: $manufacturer"
+    Write-Host -ForegroundColor Green "Model: $model"
+    Write-Host -ForegroundColor Green "OS Name: $OS"
 	Write-Host -ForegroundColor Green "OS version: $OSversion"
+    Write-Host -ForegroundColor Green "OS version: $Systemtype"
+    Write-Host -ForegroundColor Green "BIOS version: $BIOSVersion"
 
 	# 10.0.19042 -> 20H2
 	# 10.0.19044 -> 21H2
