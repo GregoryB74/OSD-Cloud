@@ -189,7 +189,8 @@ If ($WindowsPhase -eq 'OOBE')
 	{
 		Write-Host -ForegroundColor red "Secure boot is disabled"
         Write-Host -ForegroundColor red "Process can not continue. Please check your secureboot info in the BIOS"
-        start-Process "https://appuals.com/enable-secure-boot-windows-11/"
+        $Site = "www.google.com/search?q=Enable secure boot on $manufacturer $model"
+        start $Site
         Exit
 	}
 	
