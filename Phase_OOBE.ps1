@@ -30,6 +30,7 @@ $OSversion = $OSInfo.version
 Write-Host -ForegroundColor Green "PC Name: $PCName"
 Write-Host -ForegroundColor Green "Manufacturer: $manufacturer"
 Write-Host -ForegroundColor Green "Model: $model"
+Write-Host -ForegroundColor Green "Serial number: $Serial"
 Write-Host -ForegroundColor Green "OS Name: $OS"
 Write-Host -ForegroundColor Green "OS version: $OSversion"
 Write-Host -ForegroundColor Green "OS version: $Systemtype"
@@ -82,7 +83,7 @@ else
     Write-Host -ForegroundColor red "Secure boot is disabled"
     Write-Host -ForegroundColor red "Process can not continue. Please check your secureboot info in the BIOS"
     $Site = "www.google.com/search?q=Enable secure boot on $manufacturer $model"
-    start $Site
+    Start-Process $Site
     Exit
 }
 
