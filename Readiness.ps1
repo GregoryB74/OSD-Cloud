@@ -119,6 +119,7 @@ If ($WindowsPhase -eq 'OOBE')
 	Write-Host -ForegroundColor Green "[+] OOBE Phase specific actions."
 	
 	# Check OS version
+    Write-Host -ForegroundColor Green "[+] OS information:"
 	$OSInfo = Get-WmiObject Win32_OperatingSystem
 	$serial = $osinfo.SerialNumber
 	$OSversion = $OSInfo.version
