@@ -138,6 +138,7 @@ If ($WindowsPhase -eq 'OOBE')
 	else 
 	{
 		Write-Host -ForegroundColor red "Not a good version"
+        Exit
 	}
 	
 	# Check TPM
@@ -146,10 +147,12 @@ If ($WindowsPhase -eq 'OOBE')
 	if($TPMVersion.SpecVersion -like "*1.2*")
 	{
 		Write-host  -ForegroundColor red "TPM Version is 1.2. Attestation is not going to work!!!!"
+        Exit
 	}
 	elseif($TPMVersion.SpecVersion -like "*1.15*")
 	{
 		Write-host  -ForegroundColor red "TPM Version is 1.15. You are probably running this script on a VM aren't you? Attestation doesn't work on a VM!"
+        Exit
 	}
 	else 
 	{
@@ -157,6 +160,7 @@ If ($WindowsPhase -eq 'OOBE')
 	}
 
 	# Check Secure boot
+    Write-host  -ForegroundColor Yellow "Checking Secure boot enabled"
 	$SBstate = Confirm-SecureBootUEFI
 
 	if ($SBstate -eq $true)
@@ -166,6 +170,7 @@ If ($WindowsPhase -eq 'OOBE')
 	else 
 	{
 		Write-Host -ForegroundColor red "Secure boot is disabled"
+        Exit
 	}
 	
 	# Check Intune, Azure & Autopilot
