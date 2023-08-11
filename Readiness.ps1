@@ -31,7 +31,7 @@ powershell iex (irm sandbox.xxx.selecta.com)
 #>
 [CmdletBinding()]
 param()
-$ScriptName = 'check.selecta.com'
+$ScriptName = 'MWP - Check readiness'
 $ScriptVersion = '0.0.1'
 
 #####################
@@ -58,7 +58,7 @@ If ($env:SystemDrive -eq 'X:') {
 }
 
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+#Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 
 # End Region Initialize
 
@@ -116,7 +116,7 @@ If ($WindowsPhase -eq 'AuditMode') {
 
 If ($WindowsPhase -eq 'OOBE') 
 {
-	Write-Host -ForegroundColor Green "OOBE Phase specific actions."
+	Write-Host -ForegroundColor Green "[+] OOBE Phase specific actions."
 	
 	# Check OS version
 	$OSInfo = Get-WmiObject Win32_OperatingSystem
@@ -130,7 +130,7 @@ If ($WindowsPhase -eq 'OOBE')
 	# 10.0.19045 -> 22H2
 
 	$SupportedVersions = @("10.0.19045")
-	Write-host  -ForegroundColor Yellow "Checking if the device has a supported OS version"
+	Write-host  -ForegroundColor Yellow "[+] Checking if the device has a supported OS version"
 	if ($OSversion -in $SupportedVersions)
 	{
 		Write-Host -ForegroundColor Green "Version $OSversion is OK"
@@ -142,7 +142,7 @@ If ($WindowsPhase -eq 'OOBE')
 	}
 	
 	# Check TPM
-	Write-host  -ForegroundColor Yellow "Checking if the device has a required TPM 2.0 version"
+	Write-host  -ForegroundColor Yellow "[+] Checking if the device has a required TPM 2.0 version"
 	$TPMversion = Get-WmiObject -Namespace "root\cimv2\security\microsofttpm" -Query "Select SpecVersion from win32_tpm" | Select-Object specversion
 	if($TPMVersion.SpecVersion -like "*1.2*")
 	{
@@ -160,7 +160,7 @@ If ($WindowsPhase -eq 'OOBE')
 	}
 
 	# Check Secure boot
-    Write-host  -ForegroundColor Yellow "Checking Secure boot enabled"
+    Write-host  -ForegroundColor Yellow "[+] Checking Secure boot enabled"
 	$SBstate = Confirm-SecureBootUEFI
 
 	if ($SBstate -eq $true)
