@@ -57,7 +57,7 @@ If ($env:SystemDrive -eq 'X:') {
 	}
 }
 
-Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
+Write-Host -ForegroundColor Yellow "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
 #Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 
 # End Region Initialize
@@ -67,7 +67,7 @@ Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase
 ### Region Transport Layer Security (TLS) 1.2
 #####################
 
-Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
+Write-Host -ForegroundColor Yellow "[+] Transport Layer Security (TLS) 1.2"
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 # End Region TLS
@@ -116,10 +116,10 @@ If ($WindowsPhase -eq 'AuditMode') {
 
 If ($WindowsPhase -eq 'OOBE') 
 {
-	Write-Host -ForegroundColor Green "[+] OOBE Phase specific actions."
+	Write-Host -ForegroundColor Yellow "[+] OOBE Phase specific actions."
 	
 	# Check OS version
-    Write-Host -ForegroundColor Green "[+] OS information:"
+    Write-Host -ForegroundColor Yellow "[+] OS information:"
 	$OSInfo = Get-WmiObject Win32_OperatingSystem
 	$serial = $osinfo.SerialNumber
 	$OSversion = $OSInfo.version
