@@ -82,7 +82,7 @@ Write-Host -ForegroundColor Yellow "[+] Transport Layer Security (TLS) 1.2"
 If ($WindowsPhase -eq 'WinPE') {
 	Write-Host -ForegroundColor Yellow "[+] WINPE Phase specific actions."
 	Write-Host -ForegroundColor Yellow "Launching WINPE steps."
-	Invoke-WebPSScript "https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/OSDCloud_Start.ps1"
+	Invoke-WebPSScript "https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Phase_WINPE.ps1"
 	Read-Host
 	$null = Stop-Transcript -ErrorAction Ignore
 }
