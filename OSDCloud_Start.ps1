@@ -32,6 +32,31 @@ $Params = @{
     ZTI = $true
     Firmware = $false
 }
+
+# Check USB Key drive
+$DRIVES = (Get-CimInstance -Class Win32_DiskDrive -Filter 'InterfaceType = "USB"' -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_LogicalDisk).DeviceID
+
+if($Drive -ne $null)
+    {
+    Write-Host  -ForegroundColor Green "USB key found"
+    $Drive = $DRIVE[0]
+    Write-Host  -ForegroundColor Green "Letter of USB key is: $drive"
+    $Path = $DRIVE + "\OSD\Install.wim"
+    }
+else
+    {
+    Write-Host  -ForegroundColor Green "NO USB key found, Windows will be installed from internet !"
+    $Params = @{
+    OSVersion = "Windows 10"
+    OSBuild = "22H2"
+    OSEdition = "Enterprise"
+    OSLanguage = "en-us"
+    OSLicense = "Volume"
+    ZTI = $true
+    Firmware = $false
+}
+    }
+
 Start-OSDCloud @Params
 
 #================================================
