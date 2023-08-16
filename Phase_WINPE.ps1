@@ -34,7 +34,6 @@ if(Get-USBPartition)
     $USBPartitions = Get-USBPartition
     foreach($USBPartition in $USBPartitions)
     {
-        Write-Host  -ForegroundColor Green "Searching Wim file"
         $driveletter = $USBPartition.driveletter
         $Wimpath = $driveletter + ":\OSDCloud\OS\install.wim"
         if(Test-Path $Wimpath)
@@ -44,8 +43,7 @@ if(Get-USBPartition)
         }
         else
         {
-            Write-Host  -ForegroundColor Yellow "No wim file found, launching installation of Windows 10 from internet !"
-            Write-Host  -ForegroundColor Green "NO USB key found, Windows will be installed from internet !"
+            Write-Host  -ForegroundColor Yellow "No wim file found on USB key, launching installation of Windows 10 from internet !"
             $Params = @{
             OSVersion = "Windows 10"
             OSBuild = "22H2"
@@ -58,8 +56,6 @@ if(Get-USBPartition)
             Start-OSDCloud @Params
         }
     }
-    $CutomWimexist 
-    #Write-Host  -ForegroundColor Green "Letter of USB key is: $drive"
 }
 else
 {
