@@ -67,9 +67,6 @@ Else
 	}
 }
 
-Write-Host -ForegroundColor Yellow "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
-#Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
-
 # End Region Initialize
 if ((Get-MyComputerModel) -match 'Virtual') 
 {
