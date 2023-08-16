@@ -36,7 +36,7 @@ $Params = @{
 # Check USB Key drive
 $DRIVES = (Get-CimInstance -Class Win32_DiskDrive -Filter 'InterfaceType = "USB"' -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_LogicalDisk).DeviceID
 
-if($Drive -ne $null)
+if($DRIVES -ne $null)
     {
     Write-Host  -ForegroundColor Green "USB key found"
     $Drive = $DRIVE[0]
