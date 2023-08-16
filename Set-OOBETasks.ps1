@@ -22,7 +22,7 @@ Write-Host -ForegroundColor DarkGray "Executing Keyboard Language Skript"
 Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Set-KeyboardLanguage.ps1" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing Autopilot Check Script"
-Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/AP-Prereq.ps1" -Wait
+Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotPreCheck.ps1" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing AutopilotOOBE Module"
 Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotOOBE.ps1" -Wait
@@ -31,7 +31,7 @@ Write-Host -ForegroundColor DarkGray "Executing OOBEDeploy Script fomr OSDCloud 
 Start-Process PowerShell -ArgumentList "-NoL -C Start-OOBEDeploy" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing Cleanup Script"
-Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/CleanUp.ps1" -Wait
+Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-CleanUp.ps1" -Wait
 
 # Cleanup scheduled Tasks
 Write-Host -ForegroundColor DarkGray "Unregistering Scheduled Tasks"
@@ -53,15 +53,19 @@ Start-Transcript -Path (Join-Path "`$env:ProgramData\Microsoft\IntuneManagementE
 Write-Host -ForegroundColor DarkGray "Stop Debug-Mode (SHIFT + F10) with WscriptShell.SendKeys"
 `$WscriptShell = New-Object -com Wscript.Shell
 
+start-sleep -s 5
+
+# Shift + F10
+Write-Host -ForegroundColor DarkGray "SendKeys: SHIFT + F10"
+`$WscriptShell.SendKeys("+({F10})")
+
+start-sleep -s 5
+
 # ALT + TAB
 Write-Host -ForegroundColor DarkGray "SendKeys: ALT + TAB"
 `$WscriptShell.SendKeys("%({TAB})")
 
 Start-Sleep -Seconds 1
-
-# Shift + F10
-Write-Host -ForegroundColor DarkGray "SendKeys: SHIFT + F10"
-`$WscriptShell.SendKeys("+({F10})")
 
 Stop-Transcript -Verbose | Out-File
 "@
