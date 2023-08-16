@@ -45,15 +45,24 @@ $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -E
 If ($env:SystemDrive -eq 'X:') 
 {
     $WindowsPhase = 'WinPE'
-} Else {
+} 
+Else 
+{
 	$ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
-	If ($env:UserName -eq 'defaultuser0') {
+	If ($env:UserName -eq 'defaultuser0') 
+	{
 		$WindowsPhase = 'OOBE'
-	} ElseIf ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
+	} 
+	ElseIf ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') 
+	{
 		$WindowsPhase = 'Specialize'
-	} ElseIf ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {
+	} 
+	ElseIf ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') 
+	{
 		$WindowsPhase = 'AuditMode'
-	} Else {
+	} 
+	Else 
+	{
 		$WindowsPhase = 'Windows'
 	}
 }
