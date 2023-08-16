@@ -73,8 +73,10 @@ Stop-Transcript -Verbose | Out-File
 Out-File -FilePath $ScriptPathSendKeys -InputObject $SendKeysScript -Encoding ascii
 
 # Download ServiceUI.exe
-Write-Host -ForegroundColor Gray "Download ServiceUI.exe from GitHub Repo"
+Write-Host -ForegroundColor Gray "Download Tools from GitHub Repo"
 Invoke-WebRequest https://github.com/GregoryB74/Tools/raw/main/ServiceUI64.exe -OutFile "C:\OSDCloud\ServiceUI.exe"
+Invoke-WebRequest https://github.com/GregoryB74/Tools/raw/main/CMTrace.exe -OutFile "C:\OSDCloud\CMTrace.exe"
+Invoke-WebRequest https://github.com/GregoryB74/Tools/raw/main/CMTrace.exe -OutFile "C:\Windows\System32\CMTrace.exe"
 
 #Create Scheduled Task for SendKeys with 15 seconds delay
 $TaskName = "Scheduled Task for SendKeys"
