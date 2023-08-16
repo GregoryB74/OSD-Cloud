@@ -39,14 +39,8 @@ if(Get-USBPartition)
         if(Test-Path $Wimpath)
         {
             Write-Host  -ForegroundColor Green "Wim file found, launching installation"
-            $Params = @{
-            StartOSDCloud.ImageFileItem = 1
-            StartOSDCloud.OSImageIndex = 3
-            FindImageFile
-            ZTI = $true
-            }
-            Start-OSDCloud @Params
-            # Start-OSDCloud -FindImageFile -ZTI True
+            # Start-OSDCloud @Params
+            Start-OSDCloud -FindImageFile -ZTI $True
         }
         else
         {
