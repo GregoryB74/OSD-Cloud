@@ -49,6 +49,7 @@ if ($OSversion -in $SupportedVersions)
 else 
 {
     Write-Host -ForegroundColor red "Not a good version"
+    Write-Host -ForegroundColor red "You have to install from the USB key"
     Exit
 }
 

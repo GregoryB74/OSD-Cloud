@@ -18,7 +18,7 @@ Start-Process PowerShell -ArgumentList "-NoL -C Install-Module AutopilotOOBE -Fo
 Write-Host -ForegroundColor DarkGray "Installing OSD PS Module"
 Start-Process PowerShell -ArgumentList "-NoL -C Install-Module OSD -Force -Verbose" -Wait
 
-Write-Host -ForegroundColor DarkGray "Executing Keyboard Language Skript"
+Write-Host -ForegroundColor DarkGray "Executing Keyboard Language Script"
 Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Set-KeyboardLanguage.ps1" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing Autopilot Check Script"
