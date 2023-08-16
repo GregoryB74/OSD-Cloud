@@ -26,6 +26,7 @@ if ((Get-MyComputerModel) -match 'Virtual')
 
 # Check USB Key drive
 Write-Host  -ForegroundColor Green "Checking USB drive"
+$BootFromKey = $false
 
 if(Get-USBPartition)
 {
@@ -41,24 +42,17 @@ if(Get-USBPartition)
             Write-Host  -ForegroundColor Green "Wim file found, launching installation"
             # Start-OSDCloud @Params
             Start-OSDCloud -FindImageFile -ZTI
+            $BootFromKey = $true
+            break
         }
         else
         {
-            Write-Host  -ForegroundColor Yellow "No wim file found on USB key, launching installation of Windows 10 from internet !"
-            $Params = @{
-            OSVersion = "Windows 10"
-            OSBuild = "22H2"
-            OSEdition = "Enterprise"
-            OSLanguage = "en-us"
-            OSLicense = "Volume"
-            ZTI = $true
-            Firmware = $false
-            }
-            Start-OSDCloud @Params
+            Write-Host  -ForegroundColor Yellow "No Wim file found on $driveletter"
+            <# Action when this condition is true #>
         }
     }
 }
-else
+elseif($BootFromKey -eq $false)
 {
     Write-Host  -ForegroundColor Green "NO USB key found, Windows will be installed from internet !"
     $Params = @{
