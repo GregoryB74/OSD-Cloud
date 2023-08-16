@@ -30,7 +30,7 @@ Write-Host  -ForegroundColor Green "Checking USB drive"
 $DRIVES = (Get-CimInstance -Class Win32_DiskDrive -Filter 'InterfaceType = "USB"' -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_LogicalDisk).DeviceID
 
 if(Get-USBPartition)
-    {
+{
     Write-Host  -ForegroundColor Green "USB key found"
     Write-Host  -ForegroundColor Green "Searching Wim file"
     $USBPartitions = Get-USBPartition
@@ -51,9 +51,9 @@ if(Get-USBPartition)
     $CutomWimexist 
     #Write-Host  -ForegroundColor Green "Letter of USB key is: $drive"
     Start-OSDCloud -FindImageFile
-    }
+}
 else
-    {
+{
     Write-Host  -ForegroundColor Green "NO USB key found, Windows will be installed from internet !"
     $Params = @{
     OSVersion = "Windows 10"
@@ -65,9 +65,7 @@ else
     Firmware = $false
     }
     Start-OSDCloud @Params
-    }
-
-
+}
 
 #================================================
 #  [PostOS] OOBEDeploy Configuration
@@ -143,12 +141,6 @@ Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.
 Start /Wait PowerShell -NoL -C Restart-Computer -Force
 '@
 $OOBECMD | Out-File -FilePath 'C:\Windows\System32\OOBE.cmd' -Encoding ascii -Force
-
-# Options:
-# Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Set-KeyboardLanguage.ps1
-# Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Install-EmbeddedProductKey.ps1
-# Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Lenovo_BIOS_Settings.ps1
-
 
 #================================================
 #  [PostOS] SetupComplete CMD Command Line
