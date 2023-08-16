@@ -40,7 +40,7 @@ if(Get-USBPartition)
         {
             Write-Host  -ForegroundColor Green "Wim file found, launching installation"
             # Start-OSDCloud @Params
-            Start-OSDCloud -FindImageFile -ZTI $True
+            Start-OSDCloud -FindImageFile -ZTI
         }
         else
         {
