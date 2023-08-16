@@ -21,19 +21,19 @@ if ((Get-MyComputerModel) -match 'Virtual')
 #   [OS] Params and Start-OSDCloud
 #=======================================================================
 
+start-process cmd
+
+start-sleep -s 3600
+
 # Check USB Key drive
-#$DRIVES = (Get-CimInstance -Class Win32_DiskDrive -Filter 'InterfaceType = "USB"' -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_LogicalDisk).DeviceID
-$DRIVES = $null
+$DRIVES = (Get-CimInstance -Class Win32_DiskDrive -Filter 'InterfaceType = "USB"' -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_LogicalDisk).DeviceID
 
 if($DRIVES -ne $null)
     {
     Write-Host  -ForegroundColor Green "USB key found"
-    $Drive = $DRIVE[0]
-    Write-Host  -ForegroundColor Green "Letter of USB key is: $drive"
-    $Path = $DRIVE + "\OSD\Install.wim"
-    $Params = @{
-        FindImageFile = $Path
-}
+    $Drive = $DRIVES[0]
+    #Write-Host  -ForegroundColor Green "Letter of USB key is: $drive"
+    Start-OSDCloud -FindImageFile
     }
 else
     {
@@ -47,9 +47,10 @@ else
     ZTI = $true
     Firmware = $false
 }
+Start-OSDCloud @Params
     }
 
-Start-OSDCloud @Params
+
 
 #================================================
 #  [PostOS] OOBEDeploy Configuration
