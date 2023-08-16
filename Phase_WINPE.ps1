@@ -8,12 +8,8 @@ Install-Module OSD -Force
 Write-Host  -ForegroundColor Green "Importing OSD PowerShell Module"
 Import-Module OSD -Force
 
-#Start OSDCloudScriptPad
-Write-Host -ForegroundColor Green "Start OSDPad"
-#Start-OSDPad -RepoOwner GregoryB74 -RepoName OSD-Cloud -RepoFolder ScriptPad -BrandingTitle 'Gregory B OSD Cloud Deployment'
-
 #================================================
-#   [PreOS] Update Module
+#   [PreOS] VM Update resolution
 #================================================
 if ((Get-MyComputerModel) -match 'Virtual') 
 {
@@ -24,18 +20,10 @@ if ((Get-MyComputerModel) -match 'Virtual')
 #=======================================================================
 #   [OS] Params and Start-OSDCloud
 #=======================================================================
-$Params = @{
-    OSVersion = "Windows 10"
-    OSBuild = "22H2"
-    OSEdition = "Enterprise"
-    OSLanguage = "en-us"
-    OSLicense = "Volume"
-    ZTI = $true
-    Firmware = $false
-}
 
 # Check USB Key drive
-$DRIVES = (Get-CimInstance -Class Win32_DiskDrive -Filter 'InterfaceType = "USB"' -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_LogicalDisk).DeviceID
+#$DRIVES = (Get-CimInstance -Class Win32_DiskDrive -Filter 'InterfaceType = "USB"' -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_LogicalDisk).DeviceID
+$DRIVES = $null
 
 if($DRIVES -ne $null)
     {
@@ -112,53 +100,16 @@ $OOBEDeployJson = @'
                       }
 }
 '@
-If (!(Test-Path "C:\ProgramData\OSDeploy")) {
+If (!(Test-Path "C:\ProgramData\OSDeploy")) 
+{
     New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
 }
 $OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
 
 #================================================
-#  [PostOS] AutopilotOOBE Configuration Staging
-#================================================
-#Write-Host -ForegroundColor Green "Define Computername:"
-#$Serial = Get-WmiObject Win32_bios | Select-Object -ExpandProperty SerialNumber
-#$TargetComputername = $Serial.Substring(4,3)
-
-#$AssignedComputerName = "AkosCloud-$TargetComputername"
-#Write-Host -ForegroundColor Red $AssignedComputerName
-#Write-Host ""
-
-#Write-Host -ForegroundColor Green "Create C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json"
-#$AutopilotOOBEJson = @"
-#{
-#    "AssignedComputerName" : "$AssignedComputerName",
-#    "AddToGroup":  "AADGroupX",
-#    "Assign":  {
-#                   "IsPresent":  true
-#               },
-#    "GroupTag":  "GroupTagXXX",
-#    "Hidden":  [
-#                   "AddToGroup",
-#                   "AssignedUser",
-#                   "PostAction",
-#                   "GroupTag",
-#                   "Assign"
-#               ],
-#    "PostAction":  "Quit",
-#    "Run":  "NetworkingWireless",
-#    "Docs":  "https://google.com/",
-#    "Title":  "Autopilot Manual Register"
-#}
-#"@
-#
-#If (!(Test-Path "C:\ProgramData\OSDeploy")) {
-#    New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
-#}
-#$AutopilotOOBEJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json" -Encoding ascii -Force
-
-#================================================
 #  [PostOS] AutopilotOOBE CMD Command Line
 #================================================
+
 Write-Host -ForegroundColor Green "Create C:\Windows\System32\OOBE.cmd"
 $OOBECMD = @'
 PowerShell -NoL -Com Set-ExecutionPolicy RemoteSigned -Force
@@ -166,11 +117,11 @@ Set Path = %PATH%;C:\Program Files\WindowsPowerShell\Scripts
 Start /Wait PowerShell -NoL -C Install-Module AutopilotOOBE -Force -Verbose
 Start /Wait PowerShell -NoL -C Install-Module OSD -Force -Verbose
 Start /Wait PowerShell -NoL -C Invoke-WebRequest https://github.com/GregoryB74/Tools/raw/main/CMTrace.exe -OutFile "C:\Windows\System32\CMTrace.exe"
-Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/AP-Prereq.ps1
+Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotPreCheck.ps1
 Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotOOBE.ps1
 Start /Wait PowerShell -NoL -C Start-OOBEDeploy
-Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/TPM.ps1
-Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/CleanUp.ps1
+Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-TPMCheck.ps1
+Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-CleanUp.ps1
 Start /Wait PowerShell -NoL -C Restart-Computer -Force
 '@
 $OOBECMD | Out-File -FilePath 'C:\Windows\System32\OOBE.cmd' -Encoding ascii -Force
@@ -187,7 +138,7 @@ $OOBECMD | Out-File -FilePath 'C:\Windows\System32\OOBE.cmd' -Encoding ascii -Fo
 Write-Host -ForegroundColor Green "Create C:\Windows\Setup\Scripts\SetupComplete.cmd"
 $SetupCompleteCMD = @'
 powershell.exe -Command Set-ExecutionPolicy RemoteSigned -Force
-powershell.exe -Command "& {IEX (IRM https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/oobetasks.ps1)}"
+powershell.exe -Command "& {IEX (IRM https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Set-OOBETasks.ps1)}"
 '@
 $SetupCompleteCMD | Out-File -FilePath 'C:\Windows\Setup\Scripts\SetupComplete.cmd' -Encoding ascii -Force
 
