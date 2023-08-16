@@ -39,7 +39,15 @@ if(Get-USBPartition)
         if(Test-Path $Wimpath)
         {
             Write-Host  -ForegroundColor Green "Wim file found, launching installation"
-            Start-OSDCloud -FindImageFile
+            StartOSDCloud.ImageFileItem = 1
+            $Params = @{
+            StartOSDCloud.ImageFileItem = 1
+            StartOSDCloud.OSImageIndex
+            ZTI = $true
+            }
+            Start-OSDCloud @Params
+        }            
+            #Start-OSDCloud -FindImageFile -ZTI $True 
         }
         else
         {
@@ -137,7 +145,7 @@ PowerShell -NoL -Com Set-ExecutionPolicy RemoteSigned -Force
 Set Path = %PATH%;C:\Program Files\WindowsPowerShell\Scripts
 Start /Wait PowerShell -NoL -C Install-Module AutopilotOOBE -Force -Verbose
 Start /Wait PowerShell -NoL -C Install-Module OSD -Force -Verbose
-Start /Wait PowerShell -NoL -C Invoke-WebRequest https://github.com/GregoryB74/Tools/raw/main/CMTrace.exe -OutFile "C:\Windows\System32\CMTrace.exe"
+Start /Wait PowerShell -NoL -C Invoke-WebRequest https://github.com/GregoryB74/Tools/raw/main/CMTrace.exe -OutFile "X:\Windows\System32\CMTrace.exe"
 Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotPreCheck.ps1
 Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotOOBE.ps1
 Start /Wait PowerShell -NoL -C Start-OOBEDeploy
