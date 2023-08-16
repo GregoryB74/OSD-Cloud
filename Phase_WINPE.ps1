@@ -43,6 +43,10 @@ if(Get-USBPartition)
         {
             Write-Host  -ForegroundColor Green "Wim file found, launching installation"
         }
+        else
+        {
+            Write-Host  -ForegroundColor Yellow "No wim file found, launching installation of Windows 10 from internet !"
+        }
     }
     $CutomWimexist 
     #Write-Host  -ForegroundColor Green "Letter of USB key is: $drive"
