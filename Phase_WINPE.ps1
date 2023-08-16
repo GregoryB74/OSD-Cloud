@@ -21,9 +21,8 @@ if ((Get-MyComputerModel) -match 'Virtual')
 #   [OS] Params and Start-OSDCloud
 #=======================================================================
 
-start-process cmd
-
-start-sleep -s 3600
+# For troubleshooting: start-process cmd
+# For troubleshooting: start-sleep -s 3600
 
 # Check USB Key drive
 Write-Host  -ForegroundColor Green "Checking USB drive"
