@@ -26,12 +26,25 @@ start-process cmd
 start-sleep -s 3600
 
 # Check USB Key drive
+Write-Host  -ForegroundColor Green "Checking USB drive"
 $DRIVES = (Get-CimInstance -Class Win32_DiskDrive -Filter 'InterfaceType = "USB"' -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_LogicalDisk).DeviceID
 
-if($DRIVES -ne $null)
+if(Get-USBPartition)
     {
     Write-Host  -ForegroundColor Green "USB key found"
-    $Drive = $DRIVES[0]
+    Write-Host  -ForegroundColor Green "Searching Wim file"
+    $USBPartitions = Get-USBPartition
+    foreach($USBPartition in $USBPartitions)
+    {
+        Write-Host  -ForegroundColor Green "Searching Wim file"
+        $driveletter = $USBPartition.driveletter
+        $Wimpath = $driveletter + ":\OSDCloud\OS\install.wim"
+        if(Test-Path $Wimpath)
+        {
+            Write-Host  -ForegroundColor Green "Wim file found, launching installation"
+        }
+    }
+    $CutomWimexist 
     #Write-Host  -ForegroundColor Green "Letter of USB key is: $drive"
     Start-OSDCloud -FindImageFile
     }
@@ -46,8 +59,8 @@ else
     OSLicense = "Volume"
     ZTI = $true
     Firmware = $false
-}
-Start-OSDCloud @Params
+    }
+    Start-OSDCloud @Params
     }
 
 
