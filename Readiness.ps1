@@ -1,6 +1,6 @@
 <#PSScriptInfo
 .VERSION 0.0.1
-.AUTHOR Joachim Becker | Sword Technologies
+.AUTHOR Gregory Bouchu / Joachim Becker | Sword Technologies
 .COMPANYNAME Sword Technologies
 .COPYRIGHT (c) 2023 Joachim Becker Sword Technologies. All rights reserved.
 .TAGS MWP Check WinPE OOBE Windows AutoPilot
