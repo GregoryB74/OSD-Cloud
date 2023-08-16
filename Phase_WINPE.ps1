@@ -15,7 +15,8 @@ Write-Host -ForegroundColor Green "Start OSDPad"
 #================================================
 #   [PreOS] Update Module
 #================================================
-if ((Get-MyComputerModel) -match 'Virtual') {
+if ((Get-MyComputerModel) -match 'Virtual') 
+{
     Write-Host  -ForegroundColor Green "Setting Display Resolution to 1600x"
     Set-DisRes 1600
 }
@@ -42,6 +43,9 @@ if($DRIVES -ne $null)
     $Drive = $DRIVE[0]
     Write-Host  -ForegroundColor Green "Letter of USB key is: $drive"
     $Path = $DRIVE + "\OSD\Install.wim"
+    $Params = @{
+        FindImageFile = $Path
+}
     }
 else
     {
@@ -172,8 +176,8 @@ Start /Wait PowerShell -NoL -C Restart-Computer -Force
 $OOBECMD | Out-File -FilePath 'C:\Windows\System32\OOBE.cmd' -Encoding ascii -Force
 
 # Options:
-# Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/AkosBakos/OSDCloud/main/Set-KeyboardLanguage.ps1
-# Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/AkosBakos/OSDCloud/main/Install-EmbeddedProductKey.ps1
+# Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Set-KeyboardLanguage.ps1
+# Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Install-EmbeddedProductKey.ps1
 # Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Lenovo_BIOS_Settings.ps1
 
 

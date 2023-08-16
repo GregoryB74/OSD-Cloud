@@ -42,7 +42,8 @@ $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
 
 #Checking which platform we are running from when script is executed
-If ($env:SystemDrive -eq 'X:') {
+If ($env:SystemDrive -eq 'X:') 
+{
     $WindowsPhase = 'WinPE'
 } Else {
 	$ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
@@ -61,8 +62,9 @@ Write-Host -ForegroundColor Yellow "[+] $ScriptName $ScriptVersion ($WindowsPhas
 #Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 
 # End Region Initialize
-if ((Get-MyComputerModel) -match 'Virtual') {
-    Write-Host  -ForegroundColor Green "Setting Display Resolution to 1600x"
+if ((Get-MyComputerModel) -match 'Virtual') 
+{
+    Write-Host  -ForegroundColor Green "[+] Setting Display Resolution to 1600x"
     Set-DisRes 1600
 }
 
@@ -79,7 +81,8 @@ Write-Host -ForegroundColor Yellow "[+] Transport Layer Security (TLS) 1.2"
 ### Region WinPE
 #####################
 
-If ($WindowsPhase -eq 'WinPE') {
+If ($WindowsPhase -eq 'WinPE') 
+{
 	Write-Host -ForegroundColor Yellow "[+] WINPE Phase specific actions."
 	Write-Host -ForegroundColor Yellow "Launching WINPE steps."
 	Invoke-WebPSScript "https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Phase_WINPE.ps1"
@@ -93,7 +96,8 @@ If ($WindowsPhase -eq 'WinPE') {
 ### Region Specialize
 #####################
 
-If ($WindowsPhase -eq 'Specialize') {
+If ($WindowsPhase -eq 'Specialize') 
+{
 	Write-Host -ForegroundColor Red "This tool is not meant to be executed in the Specialize phase, exiting. Please press a key."
 	Read-Host
 	$null = Stop-Transcript -ErrorAction Ignore
@@ -108,7 +112,7 @@ If ($WindowsPhase -eq 'Specialize') {
 
 If ($WindowsPhase -eq 'AuditMode') 
 {
-    	Write-Host -ForegroundColor Red "This tool is not meant to be executed in the AuditMode phase, exiting. Please press a key."
+    Write-Host -ForegroundColor Red "This tool is not meant to be executed in the AuditMode phase, exiting. Please press a key."
 	Read-Host
 	$null = Stop-Transcript -ErrorAction Ignore
 	Exit
@@ -135,13 +139,12 @@ If ($WindowsPhase -eq 'OOBE')
 ### Region Windows
 #####################
 
-If ($WindowsPhase -eq 'Windows') {
-    	Write-Host -ForegroundColor Red "This tool is not meant to be executed in the the Windows deployed phase, exiting. Please press a key."
+If ($WindowsPhase -eq 'Windows') 
+{
+    Write-Host -ForegroundColor Red "This tool is not meant to be executed in the the Windows deployed phase, exiting. Please press a key."
 	Read-Host
 	$null = Stop-Transcript -ErrorAction Ignore
 	Exit
 }
 
 # End Region Windows
-
-
