@@ -26,7 +26,6 @@ if ((Get-MyComputerModel) -match 'Virtual')
 
 # Check USB Key drive
 Write-Host  -ForegroundColor Green "Checking USB drive"
-$DRIVES = (Get-CimInstance -Class Win32_DiskDrive -Filter 'InterfaceType = "USB"' -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -KeyOnly | Get-CimAssociatedInstance -ResultClassName Win32_LogicalDisk).DeviceID
 
 if(Get-USBPartition)
 {
