@@ -114,7 +114,7 @@ Get-CMCollectionMember -CollectionName "All Systems" | .\GetWindowsAutoPilotInfo
 
 #>
 
-[CmdletBinding(DefaultParameterSetName = 'Default')]
+<# [CmdletBinding(DefaultParameterSetName = 'Default')]
 param(
 	[Parameter(Mandatory=$False,ValueFromPipeline=$True,ValueFromPipelineByPropertyName=$True,Position=0)][alias("DNSHostName","ComputerName","Computer")] [String[]] $Name = @("localhost"),
 	[Parameter(Mandatory=$False)] [String] $OutputFile = "", 
@@ -133,9 +133,11 @@ param(
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [Switch] $Assign = $false, 
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [Switch] $Reboot = $false
 )
+ #>
+
 Write-Host "Setting online value: $Online"
 Start-Sleep -s 20
-
+Read-Host
 Begin
 {
 	# Initialize empty list
