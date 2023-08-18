@@ -136,13 +136,13 @@ param(
 
 
 Write-Host "Setting online value: $Online"
-Start-Sleep -s 20
 
 	# Initialize empty list
 	$computers = @()
     If (Test-Path -Path 'C:\ProgramData\OSDeploy\Grouptag.txt')
     {
         $GroupTag = Get-content 'C:\ProgramData\OSDeploy\Grouptag.txt' 
+        Write-Host $GroupTag
     }
     Write-Host "Setting online value: $Online"
 	# If online, make sure we are able to authenticate
