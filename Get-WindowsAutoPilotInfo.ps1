@@ -124,7 +124,7 @@ param(
 	[Parameter(Mandatory=$False)] [System.Management.Automation.PSCredential] $Credential = $null,
 	[Parameter(Mandatory=$False)] [Switch] $Partner = $false,
 	[Parameter(Mandatory=$False)] [Switch] $Force = $false,
-	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [Switch] $Online = $false,
+	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [Switch] $Online = $False,
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [String] $TenantId = "",
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [String] $AppId = "",
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [String] $AppSecret = "",
@@ -142,8 +142,9 @@ Begin
     {
         $GroupTag = Get-content 'C:\ProgramData\OSDeploy\Grouptag.txt' 
     }
-
+    Write-Host "Setting online value: $Online"
 	# If online, make sure we are able to authenticate
+    Start-Sleep -s 20
 	if ($Online) {
 
 		# Get NuGet
