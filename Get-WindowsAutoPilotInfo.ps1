@@ -138,7 +138,7 @@ param(
 Write-Host "Setting online value: $Online"
 Start-Sleep -s 20
 Read-Host
-Begin
+<# Begin
 {
 	# Initialize empty list
 	$computers = @()
@@ -473,3 +473,4 @@ End
 	}
     Read-Host
 }
+ #>
