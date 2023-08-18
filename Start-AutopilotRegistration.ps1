@@ -86,7 +86,6 @@ function Show-Sel_AutoPilot_psf {
 			$LBL_selectGroupTag.Text = "This device has already been Autopilot Registered. Registration will not be enabled"
 			$CBX_GroupTag.Enabled = $false
 		}
-		
 	}
 	
 	#region Control Helper Functions
@@ -178,9 +177,10 @@ function Show-Sel_AutoPilot_psf {
 		$GrouptagVal = $CBX_GroupTag.Text
 		$GrouptagVal | Out-File -FilePath "C:\ProgramData\OSDeploy\Grouptag.txt" -Encoding ascii -Force
 		Start-Sleep -s 2
+		$Autopilot.Close()
 		Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Get-WindowsAutoPilotInfo.ps1" -Wait
 		#Invoke-WebPSScript "https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Get-WindowsAutoPilotInfo.ps1"
-		$Autopilot.Close()
+
 	}
 	
 	# --End User Generated Script--
