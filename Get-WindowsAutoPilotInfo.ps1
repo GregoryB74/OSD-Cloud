@@ -146,7 +146,9 @@ Write-Host "Setting online value: $Online"
     }
     Write-Host "Setting online value: $Online"
 	# If online, make sure we are able to authenticate
-    Start-Sleep -s 20
+    $Online = $True
+
+
 	if ($Online) {
 
 		# Get NuGet
