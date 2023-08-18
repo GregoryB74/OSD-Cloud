@@ -92,6 +92,3 @@ else
 Write-Host -ForegroundColor Green "[+] Installing WindowsAutoPilotIntune PowerShell Module"
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 Install-Module -Name WindowsAutoPilotIntune
-
-
-
