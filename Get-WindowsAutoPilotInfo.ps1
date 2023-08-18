@@ -133,6 +133,8 @@ param(
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [Switch] $Assign = $false, 
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [Switch] $Reboot = $false
 )
+Write-Host "Setting online value: $Online"
+Start-Sleep -s 20
 
 Begin
 {
