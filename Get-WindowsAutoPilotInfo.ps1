@@ -114,7 +114,7 @@ Get-CMCollectionMember -CollectionName "All Systems" | .\GetWindowsAutoPilotInfo
 
 #>
 
-<# [CmdletBinding(DefaultParameterSetName = 'Default')]
+[CmdletBinding(DefaultParameterSetName = 'Default')]
 param(
 	[Parameter(Mandatory=$False,ValueFromPipeline=$True,ValueFromPipelineByPropertyName=$True,Position=0)][alias("DNSHostName","ComputerName","Computer")] [String[]] $Name = @("localhost"),
 	[Parameter(Mandatory=$False)] [String] $OutputFile = "", 
@@ -133,13 +133,12 @@ param(
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [Switch] $Assign = $false, 
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [Switch] $Reboot = $false
 )
- #>
+
 
 Write-Host "Setting online value: $Online"
 Start-Sleep -s 20
 Read-Host
-<# Begin
-{
+
 	# Initialize empty list
 	$computers = @()
     If (Test-Path -Path 'C:\ProgramData\OSDeploy\Grouptag.txt')
@@ -210,10 +209,9 @@ Read-Host
 			$OutputFile = "$($env:TEMP)\autopilot.csv"
 		} 
 	}
-}
 
-Process
-{
+
+
 	foreach ($comp in $Name)
 	{
 		$bad = $false
@@ -316,10 +314,9 @@ Process
 
 		Remove-CimSession $session
 	}
-}
 
-End
-{
+
+
 	if ($OutputFile -ne "")
 	{
 		if ($Append)
@@ -472,5 +469,4 @@ End
 		}
 	}
     Read-Host
-}
- #>
+
