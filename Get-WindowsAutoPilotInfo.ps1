@@ -135,7 +135,6 @@ param(
 )
 
 
-Write-Host "Setting online value: $Online"
 
 	# Initialize empty list
 	$computers = @()
@@ -144,11 +143,12 @@ Write-Host "Setting online value: $Online"
         $GroupTag = Get-content 'C:\ProgramData\OSDeploy\Grouptag.txt' 
         Write-Host $GroupTag
     }
-    Write-Host "Setting online value: $Online"
+    
 	# If online, make sure we are able to authenticate
     $Online = $True
 
-
+    Write-Host "Setting online value: $Online"
+    
 	if ($Online) {
 
 		# Get NuGet
