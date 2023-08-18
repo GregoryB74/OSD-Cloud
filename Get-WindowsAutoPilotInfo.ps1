@@ -124,7 +124,7 @@ param(
 	[Parameter(Mandatory=$False)] [System.Management.Automation.PSCredential] $Credential = $null,
 	[Parameter(Mandatory=$False)] [Switch] $Partner = $false,
 	[Parameter(Mandatory=$False)] [Switch] $Force = $false,
-	[Parameter(Mandatory=$True,ParameterSetName = 'Online')] [Switch] $Online = $false,
+	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [Switch] $Online = $false,
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [String] $TenantId = "",
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [String] $AppId = "",
 	[Parameter(Mandatory=$False,ParameterSetName = 'Online')] [String] $AppSecret = "",
