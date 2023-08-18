@@ -22,7 +22,7 @@ Write-Host -ForegroundColor DarkGray "Executing Autopilot Check Script"
 Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotPreCheck.ps1" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing Autopilot Check Script"
-Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://github.com/GregoryB74/OSD-Cloud/blob/main/Start-AutopilotRegistration.ps1" -Wait
+Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-AutopilotRegistration.ps1" -Wait
 
 Write-Host -ForegroundColor DarkGray "Executing Cleanup Script"
 Start-Process PowerShell -ArgumentList "-NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/GregoryB74/OSD-Cloud/main/Start-CleanUp.ps1" -Wait
@@ -32,13 +32,13 @@ Write-Host -ForegroundColor DarkGray "Unregistering Scheduled Tasks"
 Unregister-ScheduledTask -TaskName "Scheduled Task for SendKeys" -Confirm:`$false
 Unregister-ScheduledTask -TaskName "Scheduled Task for OSDCloud post installation" -Confirm:`$false
 
-Write-Host -ForegroundColor DarkGray "Restarting Computer"
-Start-Process PowerShell -ArgumentList "-NoL -C Restart-Computer -Force" -Wait
-
 Stop-Transcript -Verbose | Out-File
 "@
 
 Out-File -FilePath $ScriptPathOOBE -InputObject $OOBEScript -Encoding ascii
+
+<# Write-Host -ForegroundColor DarkGray "Restarting Computer"
+Start-Process PowerShell -ArgumentList "-NoL -C Restart-Computer -Force" -Wait #>
 
 $SendKeysScript = @"
 `$Global:Transcript = "`$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-SendKeys.log"
