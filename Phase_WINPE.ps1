@@ -52,7 +52,7 @@ if(Get-USBPartition)
         }
     }
 }
-elseif($BootFromKey -eq $false)
+if($BootFromKey -eq $false)
 {
     Write-Host  -ForegroundColor Green "NO USB key found, Windows will be installed from internet !"
     $Params = @{
