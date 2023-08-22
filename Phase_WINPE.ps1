@@ -39,11 +39,20 @@ if(Get-USBPartition)
         $Wimpath = $driveletter + ":\OSDCloud\OS\install.wim"
         if(Test-Path $Wimpath)
         {
-            Write-Host  -ForegroundColor Green "Wim file found, launching installation"
+            Write-Host  -ForegroundColor Green "Wim file found, launching confirmation message."
             # Start-OSDCloud @Params
-            Start-OSDCloud -FindImageFile -ZTI
-            $BootFromKey = $true
-            break
+            $newobject = new-object -comobject wscript.shell
+            $Message = $newobject.popup("Would you like to proceed with local install (Yes), or install from Internet (No) ?",10," Confirmation (Message will close in 10 seconds ",1)
+            if ($Message -eq '1')
+            {
+                Start-OSDCloud -FindImageFile -ZTI
+                $BootFromKey = $true
+                break
+            }
+            else 
+            {
+                $BootFromKey = $false
+            }
         }
         else
         {
